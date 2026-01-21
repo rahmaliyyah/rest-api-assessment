@@ -29,7 +29,7 @@ class SimpleAuthMiddleware
         }
 
         
-        $request->merge(['auth_user' => $user]);
+      $request->merge(['auth_user' => $user->fresh()]);
         
         return $next($request);
     }

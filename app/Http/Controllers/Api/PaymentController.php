@@ -58,7 +58,7 @@ class PaymentController extends Controller
                     'remarks' => $payment->remarks,
                     'balance_before' => (float) $payment->balance_before,
                     'balance_after' => (float) $payment->balance_after,
-                    'created_date' => $payment->created_date->format('Y-m-d H:i:s'),
+                    'created_date' => now(), 
                 ]
             ], 200);
         } catch (\Exception $e) {

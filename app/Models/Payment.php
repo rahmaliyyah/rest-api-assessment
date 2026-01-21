@@ -22,6 +22,8 @@ class Payment extends Model
         'remarks',
         'balance_before',
         'balance_after',
+        'created_date',  
+    'updated_date', 
     ];
 
     protected $casts = [
