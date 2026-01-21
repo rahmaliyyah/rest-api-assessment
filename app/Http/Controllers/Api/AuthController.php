@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -25,6 +26,8 @@ class AuthController extends Controller
                 'message' => $validator->errors()->first()
             ], 400);
         }
+
+        // Check if phone number already exists
         if (User::where('phone_number', $request->phone_number)->exists()) {
             return response()->json([
                 'message' => 'Phone Number already registered'
@@ -74,7 +77,7 @@ class AuthController extends Controller
             ], 400);
         }
 
-        $token = auth()->login($user);
+        $token = Auth::guard('api')->login($user);
 
         return response()->json([
             'status' => 'SUCCESS',
