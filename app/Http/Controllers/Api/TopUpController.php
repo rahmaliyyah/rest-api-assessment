@@ -50,7 +50,8 @@ class TopUpController extends Controller
                     'amount_top_up' => (float) $topUp->amount_top_up,
                     'balance_before' => (float) $topUp->balance_before,
                     'balance_after' => (float) $topUp->balance_after,
-                    'created_date' => $topUp->created_date->format('Y-m-d H:i:s'),
+                    'created_date' => optional($topUp->created_date)->format('Y-m-d H:i:s'),
+
                 ]
             ], 200);
         } catch (\Exception $e) {
