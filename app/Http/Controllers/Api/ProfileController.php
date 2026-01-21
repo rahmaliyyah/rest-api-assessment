@@ -3,19 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
-
     public function update(Request $request)
     {
-        $user = auth()->user();
+        $user = Auth::guard('api')->user();
 
         $validator = Validator::make($request->all(), [
             'first_name' => 'sometimes|string|max:255',
@@ -44,17 +41,18 @@ class ProfileController extends Controller
                 $updateData['address'] = $request->address;
             }
 
-            $user->update($updateData);
-            $user->refresh();
+            User::where('user_id', $user->user_id)->update($updateData);
+            
+            $updatedUser = User::find($user->user_id);
 
             return response()->json([
                 'status' => 'SUCCESS',
                 'result' => [
-                    'user_id' => $user->user_id,
-                    'first_name' => $user->first_name,
-                    'last_name' => $user->last_name,
-                    'address' => $user->address,
-                    'updated_date' => $user->updated_date ? $user->updated_date->format('Y-m-d H:i:s') : null,
+                    'user_id' => $updatedUser->user_id,
+                    'first_name' => $updatedUser->first_name,
+                    'last_name' => $updatedUser->last_name,
+                    'address' => $updatedUser->address,
+                    'updated_date' => $updatedUser->updated_date ? $updatedUser->updated_date->format('Y-m-d H:i:s') : null,
                 ]
             ], 200);
         } catch (\Exception $e) {

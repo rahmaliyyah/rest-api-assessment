@@ -4,17 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class PaymentController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
-
     public function pay(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -28,7 +25,7 @@ class PaymentController extends Controller
             ], 400);
         }
 
-        $user = auth()->user();
+        $user = Auth::guard('api')->user();
 
         if ($user->balance < $request->amount) {
             return response()->json([
@@ -50,7 +47,7 @@ class PaymentController extends Controller
                 'balance_after' => $balanceAfter,
             ]);
 
-            $user->update(['balance' => $balanceAfter]);
+            User::where('user_id', $user->user_id)->update(['balance' => $balanceAfter]);
 
             DB::commit();
 

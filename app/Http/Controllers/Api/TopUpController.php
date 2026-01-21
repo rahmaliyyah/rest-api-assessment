@@ -4,17 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\TopUp;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class TopUpController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
-
     public function topUp(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -27,7 +24,7 @@ class TopUpController extends Controller
             ], 400);
         }
 
-        $user = auth()->user();
+        $user = Auth::guard('api')->user();
 
         try {
             DB::beginTransaction();
@@ -42,7 +39,7 @@ class TopUpController extends Controller
                 'balance_after' => $balanceAfter,
             ]);
 
-            $user->update(['balance' => $balanceAfter]);
+            User::where('user_id', $user->user_id)->update(['balance' => $balanceAfter]);
 
             DB::commit();
 

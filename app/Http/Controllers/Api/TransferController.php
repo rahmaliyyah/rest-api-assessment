@@ -7,15 +7,11 @@ use App\Jobs\ProcessTransfer;
 use App\Models\Transfer;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class TransferController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
-
     public function transfer(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -30,7 +26,7 @@ class TransferController extends Controller
             ], 400);
         }
 
-        $user = auth()->user();
+        $user = Auth::guard('api')->user();
 
         if ($user->balance < $request->amount) {
             return response()->json([
@@ -62,6 +58,7 @@ class TransferController extends Controller
                 'status' => 'PENDING',
             ]);
 
+            // Dispatch job to background
             ProcessTransfer::dispatch($transfer->transfer_id);
 
             return response()->json([
