@@ -24,7 +24,7 @@
         <div class="bg-white border-b border-gray-200">
             <div class="container mx-auto px-6 py-4">
                 <h1 class="text-2xl font-bold text-gray-900">Dashboard Monitoring</h1>
-                <p class="text-sm text-gray-500 mt-1">REST API Assessment - Real-time monitoring</p>
+                <p class="text-sm text-gray-500 mt-1">REST API Assessment</p>
             </div>
         </div>
 
