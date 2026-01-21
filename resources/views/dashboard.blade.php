@@ -20,7 +20,7 @@
 </head>
 <body>
     <div class="min-h-screen">
-        <!-- Header -->
+     
         <div class="bg-white border-b border-gray-200">
             <div class="container mx-auto px-6 py-4">
                 <h1 class="text-2xl font-bold text-gray-900">Dashboard Monitoring</h1>
@@ -29,7 +29,7 @@
         </div>
 
         <div class="container mx-auto px-6 py-8">
-            <!-- Statistics Cards -->
+           
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
                 <div class="bg-white border border-gray-200 rounded-lg p-6">
                     <div class="flex items-center justify-between mb-2">
@@ -80,7 +80,6 @@
                 </div>
             </div>
 
-            <!-- Charts & Status -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div class="bg-white border border-gray-200 rounded-lg p-6">
                     <h2 class="text-lg font-bold mb-6 text-gray-900">Transfer Status</h2>
@@ -106,7 +105,7 @@
                 </div>
             </div>
 
-            <!-- Recent Transfers -->
+          
             <div class="bg-white border border-gray-200 rounded-lg p-6 mb-8">
                 <h2 class="text-lg font-bold mb-6 text-gray-900">Recent Transfers</h2>
                 <div class="overflow-x-auto">
@@ -149,7 +148,7 @@
                 </div>
             </div>
 
-            <!-- Jobs Section -->
+           
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-white border border-gray-200 rounded-lg p-6">
                     <h2 class="text-lg font-bold mb-6 text-gray-900">Pending Jobs</h2>
