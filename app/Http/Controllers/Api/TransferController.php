@@ -26,7 +26,7 @@ class TransferController extends Controller
             ], 400);
         }
 
-        $user = Auth::guard('api')->user();
+       $user = $request->auth_user;
 
         if ($user->balance < $request->amount) {
             return response()->json([
@@ -56,6 +56,7 @@ class TransferController extends Controller
                 'balance_before' => $user->balance,
                 'balance_after' => $user->balance - $request->amount,
                 'status' => 'PENDING',
+                'created_date' => now(),
             ]);
 
             

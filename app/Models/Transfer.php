@@ -24,6 +24,8 @@ class Transfer extends Model
         'balance_before',
         'balance_after',
         'status',
+         'created_date',
+        'updated_date',
     ];
 
     protected $casts = [
