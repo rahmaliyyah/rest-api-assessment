@@ -7,15 +7,14 @@ use App\Models\Payment;
 use App\Models\TopUp;
 use App\Models\Transfer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $user = Auth::guard('api')->user();
+        $user = $request->auth_user;
 
-        // Get transfers (DEBIT)
+      
         $transfers = Transfer::where('user_id', $user->user_id)
             ->where('status', 'SUCCESS')
             ->get()

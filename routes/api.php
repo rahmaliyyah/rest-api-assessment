@@ -12,7 +12,7 @@ use App\Http\Controllers\Api\ProfileController;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware('simple.auth')->group(function () {
     Route::post('/topup', [TopUpController::class, 'topUp']);
     Route::post('/pay', [PaymentController::class, 'pay']);
     Route::post('/transfer', [TransferController::class, 'transfer']);

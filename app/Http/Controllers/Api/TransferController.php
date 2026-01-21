@@ -58,7 +58,7 @@ class TransferController extends Controller
                 'status' => 'PENDING',
             ]);
 
-            // Dispatch job to background
+            
             ProcessTransfer::dispatch($transfer->transfer_id);
 
             return response()->json([

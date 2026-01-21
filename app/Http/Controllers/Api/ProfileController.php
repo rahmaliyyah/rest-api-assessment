@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
     public function update(Request $request)
     {
-        $user = Auth::guard('api')->user();
+       
+        $user = $request->auth_user;
 
         $validator = Validator::make($request->all(), [
             'first_name' => 'sometimes|string|max:255',

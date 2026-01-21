@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\TopUp;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -24,7 +23,8 @@ class TopUpController extends Controller
             ], 400);
         }
 
-        $user = Auth::guard('api')->user();
+    
+        $user = $request->auth_user;
 
         try {
             DB::beginTransaction();
